@@ -43,6 +43,9 @@ run:
 ip:
 	@echo $(container_ip)
 
+ping:
+	ansible -m ping -i hosts -u root git_servers
+
 .PHONY: hosts
 hosts:
 	@echo "[git_servers]" > hosts 
@@ -62,5 +65,5 @@ uninstall:
 	@docker rmi $(image_name)
 
 help:
-	@echo "Usage: make {setup,build,install,check,ip,run,hosts,ssh,clean,uninstall,help}"
+	@echo "Usage: make {setup,build,install,check,ip,ping,run,hosts,ssh,clean,uninstall,help}"
 

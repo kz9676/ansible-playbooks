@@ -26,6 +26,16 @@ Ansible Git Container Makefile Targets
         Run the new container.
         $ make run
 
+    IP
+
+        Print the running container IP address.
+        $ make ip
+
+    Ping
+
+        Verify the container is running.
+        $ make ping
+
     Hosts
 
         Generate Ansible hosts file.
