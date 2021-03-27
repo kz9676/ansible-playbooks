@@ -1,5 +1,5 @@
 #
-# Makefile -- Git container build rules and helper utilities 
+# Makefile -- Ansible Git container build rules and helper utilities 
 #
 #
 # Copyright (C) 2021 Kostya Zolotarov
@@ -22,7 +22,7 @@ image_name = ansible-git
 container_name = git
 container_ip = $(shell docker inspect --format '{{.NetworkSettings.IPAddress}}' $(container_name))
 
-all: setup build run
+all: build run hosts check install
 
 setup:
 	@cp -v ~/.ssh/id_rsa.pub .
@@ -31,7 +31,7 @@ build: setup
 	@docker build -t $(image_name) -f ../Dockerfile .
 
 install:
-	@docker images $(image_name)
+	ansible-playbook -i hosts -u root site.yml
 
 check:
 	@docker images $(image_name)

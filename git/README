@@ -1,49 +1,65 @@
-Ansible Git container makefile targets
+Ansible Git Container
 
-Setup
 
-    Copy public SSH key from ~/.ssh.
-    $ make setup
+Usage
 
-Build
+    $ make            # Build, run and configure the container 
+    $ make ssh        # SSH into the container
+    $ make stop       # Stop the container
+    $ make uninstall  # Delete the container image
+    
 
-    Build Docker image.
-    $ make build
+Ansible Git Container Makefile Targets
 
-Run
+    Setup
 
-    Run the new container.
-    $ make run
+        Copy public SSH key from ~/.ssh.
+        $ make setup
 
-Hosts
+    Build
 
-    Generate Ansible hosts file.
-    $ make hosts
+        Build Docker image.
+        $ make build
 
-Check
+    Run
 
-    Verify the new image and the new container.
-    $ make check
+        Run the new container.
+        $ make run
 
-SSH
+    Hosts
 
-    SSH into the container.
-    $ make ssh
+        Generate Ansible hosts file.
+        $ make hosts
 
-Stop
+    Check
 
-    Stop the container.
-    $ make stop
+        Verify the new image and the new container.
+        $ make check
 
-Clean
+    Install
 
-    Remove temporary build files.
-    $ make clean
+        Run the Ansible Git playbook.
+        $ make install
 
-Uninstall
+    SSH
 
-    Delete the image.
-    $ make uninstall
+        SSH into the container.
+        $ make ssh
+
+    Stop
+
+        Stop the container.
+        $ make stop
+
+    Clean
+
+        Remove temporary build files.
+        $ make clean
+
+    Uninstall
+
+        Delete the container image.
+        $ make uninstall
 
 
 The GPLv3 License (GPL)
