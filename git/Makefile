@@ -39,9 +39,14 @@ check:
 
 run:
 	@docker run --name $(container_name) --rm -d $(image_name)
-	
+
 ip:
 	@echo $(container_ip)
+
+.PHONY: hosts
+hosts:
+	@echo "[git_servers]" > hosts 
+	@echo $(container_ip) >> hosts 
 	
 ssh:
 	ssh-keyscan -t ecdsa $(container_ip) >> $(HOME)/.ssh/known_hosts
@@ -57,5 +62,5 @@ uninstall:
 	@docker rmi $(image_name)
 
 help:
-	@echo "Usage: make {setup,build,install,check,ip,ssh,clean,uninstall,help}"
+	@echo "Usage: make {setup,build,install,check,ip,run,hosts,ssh,clean,uninstall,help}"
 
