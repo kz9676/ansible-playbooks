@@ -61,6 +61,7 @@ stop:
 
 clean:
 	@if [ -f ./id_rsa.pub ]; then rm -v ./id_rsa.pub; fi
+	@echo "[i3_desktops]" > hosts
 
 uninstall:
 	@docker rmi $(image_name)

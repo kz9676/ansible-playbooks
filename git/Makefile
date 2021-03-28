@@ -60,6 +60,7 @@ stop:
 
 clean:
 	@if [ -f ./id_rsa.pub ]; then rm -v ./id_rsa.pub; fi
+	@echo "[git_servers]" > hosts
 
 uninstall:
 	@docker rmi $(image_name)
