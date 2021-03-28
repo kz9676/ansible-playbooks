@@ -2,6 +2,7 @@ Reusable Ansible playbooks.
 
 * Dockerfile - Base image container with Python and SSH server
 * git/ - Git playbook
+* i3/ - i3 desktop playbook
 
 
 The GPLv3 License (GPL)

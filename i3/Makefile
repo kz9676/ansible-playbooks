@@ -1,5 +1,6 @@
 #
-# Makefile -- Base image container build rules and helper utilities 
+# Makefile -- Build rules and helper utilities for i3 window manager
+# container.
 #
 #
 # Copyright (C) 2021 Kostya Zolotarov
@@ -18,20 +19,20 @@
 # along with this program. If not, see <https://www.gnu.org/licenses/>.
 #
 
-image_name = base
-container_name = base
+image_name = ansible-i3
+container_name = i3
 container_ip = $(shell docker inspect --format '{{.NetworkSettings.IPAddress}}' $(container_name))
 
-all: setup build run
+all: build run hosts check install
 
 setup:
 	@cp -v ~/.ssh/id_rsa.pub .
 
 build: setup
-	@docker build -t $(image_name) .
+	@docker build -t $(image_name) -f ../Dockerfile .
 
 install:
-	@docker images $(image_name)
+	ansible-playbook -i hosts -u root site.yml
 
 check:
 	@docker images $(image_name)
@@ -39,9 +40,17 @@ check:
 
 run:
 	@docker run --name $(container_name) --rm -d $(image_name)
-	
+
 ip:
 	@echo $(container_ip)
+
+ping: hosts
+	ansible -m ping -i hosts -u root i3_desktops
+
+.PHONY: hosts
+hosts:
+	@echo "[i3_desktops]" > hosts 
+	@echo $(container_ip) >> hosts 
 	
 ssh:
 	ssh-keyscan -t ecdsa $(container_ip) >> $(HOME)/.ssh/known_hosts
@@ -57,5 +66,5 @@ uninstall:
 	@docker rmi $(image_name)
 
 help:
-	@echo "Usage: make {setup,build,install,check,ip,ssh,clean,uninstall,help}"
+	@echo "Usage: make {setup,build,install,check,ip,ping,run,hosts,ssh,clean,uninstall,help}"
 

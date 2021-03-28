@@ -43,7 +43,7 @@ run:
 ip:
 	@echo $(container_ip)
 
-ping:
+ping: hosts
 	ansible -m ping -i hosts -u root git_servers
 
 .PHONY: hosts
